@@ -48,7 +48,6 @@ void sim_cache(cache_s cache, addr_t address);
 int find_evict_line(cache_set set, int* used_lines);
 int find_empty_line(cache_set set);
 void free_cache(cache_s cache);
-long long bit_pow(int exp);
 
 int main(int argc, char** argv)
 {
@@ -60,10 +59,8 @@ int main(int argc, char** argv)
     int word;
     if(!check_args()) exit(1);
 
-    // long long num_sets = pow(2.0,s);
-    // long long block_size = bit_pow(b);
-    S = pow(2.0,s);
-    B = bit_pow(b);
+    S = pow(2,s);
+    B = pow(2,b);
 
     cache_s cache;
     cache = set_cache();
@@ -274,11 +271,4 @@ void free_cache(cache_s cache)
     }
 
     if(cache.sets!=NULL) free(cache.sets);
-}
-
-long long bit_pow(int exp) 
-{
-	long long result = 1;
-	result = result << exp;
-	return result;
 }
